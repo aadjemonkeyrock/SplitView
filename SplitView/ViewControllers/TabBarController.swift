@@ -27,15 +27,10 @@ final class TabBarController: UITabBarController {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let splitViewController = self.splitViewController as? SplitViewController else { return }
         
+        // keep track of the current tab, to make sure we can persist the current view on size changes
         splitViewController.tab = item.tag
     }
     
-//    private func getTab() -> Int {
-//        if let svc = self.splitViewController as? SplitViewController {
-//            return svc.tab
-//        }
-//
-//        return 0
-//    }
+
 }
 

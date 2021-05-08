@@ -8,9 +8,7 @@
 import UIKit
 
 final class SidebarViewController: UIViewController {
-    
-    static let sectionHeaderElementKind = "section-header-element-kind"
-    
+        
     private enum SidebarSection: Int {
         case library
     }
@@ -21,9 +19,12 @@ final class SidebarViewController: UIViewController {
     public var selectedIndex: Int = 0 {
         didSet {
             // Set the navigation
-            collectionView.selectItem(at: IndexPath(row: self.selectedIndex, section: 0),
-                                      animated: false,
-                                      scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
+            if let cv = collectionView {
+                cv.selectItem(at: IndexPath(row: self.selectedIndex, section: 0),
+                                          animated: false,
+                                          scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
+
+            }
             
             // Set the correct view
             if  let t = TabsViewModel.init(rawValue: self.selectedIndex) {
@@ -33,6 +34,22 @@ final class SidebarViewController: UIViewController {
         }
     }
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+
+    private func commonInit() {
+        // Important to set the title during construction instead of viewDidLoad.
+        // When iPad starts in portrait mode the SidebarViewController is constructed, but not loaded. Still the title nees to be set for the correct navigation link.
+        self.title = "Going Walkabout"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -42,8 +59,8 @@ final class SidebarViewController: UIViewController {
         applyInitialSnapshot()
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.title = "Going Walkabout"
-        
+
+        // Set the initial view controller
         self.selectedIndex = 0
     }
 
@@ -86,8 +103,11 @@ extension SidebarViewController: UICollectionViewDelegate {
             splitViewController.tab = indexPath.row
         }
         
+        // By default the secondary view has a navigation controller, so when showing a detail it becomes part of the navigation stack.
+        // Typically you want a navigation stack per menu, so you must set a new Navigation controller for that the work properly
         let nc = UINavigationController(rootViewController: tab.primaryViewController)
         splitViewController.showDetailViewController(nc, sender: self)
+        
     }
 }
 

@@ -23,6 +23,34 @@
             </objects>
             <point key="canvasLocation" x="106" y="139"/>
         </scene>
+        <!--Trips View Controller-->
+        <scene sceneID="wZ8-He-jGt">
+            <objects>
+                <viewController storyboardIdentifier="TripsViewController" id="g2v-GZ-t5S" customClass="TripsViewController" customModule="SplitView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MBJ-NK-rZ6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trips" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlA-Eu-5fV">
+                                <rect key="frame" x="20" y="433" width="374" height="30"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Yy-ze-Joe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KlA-Eu-5fV" firstAttribute="centerY" secondItem="MBJ-NK-rZ6" secondAttribute="centerY" id="Ha9-HA-gyW"/>
+                            <constraint firstItem="KlA-Eu-5fV" firstAttribute="leading" secondItem="1Yy-ze-Joe" secondAttribute="leading" constant="20" id="YKU-Sn-rAq"/>
+                            <constraint firstItem="1Yy-ze-Joe" firstAttribute="trailing" secondItem="KlA-Eu-5fV" secondAttribute="trailing" constant="20" id="m9b-uo-TwH"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pPO-GV-a5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937.68115942028987" y="65.625"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

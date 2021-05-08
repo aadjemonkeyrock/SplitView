@@ -24,11 +24,11 @@ final class SplitViewController: UISplitViewController {
     private func commonInit() {
         preferredDisplayMode = .automatic
         preferredSplitBehavior = .automatic
-        
+                
         self.setViewController(SidebarViewController(), for: .primary)
         // Important to set the secondary view controller to a default, because starting iPad in portrait does need it before showing the sidebar
-        self.setViewController( TabsViewModel.trips.primaryViewController, for: .secondary)
-//        self.setViewController( UINavigationController(rootViewController: TabsViewModel.trips.primaryViewController), for: .secondary)
+        self.setViewController( UINavigationController(rootViewController: TabsViewModel.trips.primaryViewController), for: .secondary)
+
         self.setViewController(TabBarController(), for: .compact)
         
         super.delegate = self
@@ -41,6 +41,7 @@ extension SplitViewController: UISplitViewControllerDelegate {
     func splitViewControllerDidExpand(_ svc: UISplitViewController) {
         print("Did expand")
 
+        // Must do this on the Main queue outside of the delegate process, try without you will learn
         DispatchQueue.main.async {
             if let sbc = svc.viewController(for: .primary) as? SidebarViewController {
                 sbc.selectedIndex = self.tab

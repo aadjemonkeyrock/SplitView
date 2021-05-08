@@ -43,7 +43,7 @@ enum TabsViewModel: Int, CaseIterable {
     /// Return:-  the master/primary `topViewController`,  it instantiates a view controller using a convenient method for `UIStoryboards`.
     var primaryViewController: UIViewController  {
         switch self {
-        case .trips: return TripsViewController()
+        case .trips: return TripsViewController.create()!
         case .explore: return ExploreViewController()
         case .notifications: return NotificationsViewController()
         case .profile: return ProfileViewController()
@@ -56,7 +56,16 @@ enum TabsViewModel: Int, CaseIterable {
 class TripsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        // if you want tabs without text (icons only) don't set self.title = ... but use self.navigationItem.title
         self.navigationItem.title = TabsViewModel.trips.title
+    }
+    
+    class func create() -> TripsViewController? {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TripsViewController") as! TripsViewController
+        
+        return vc
     }
 }
 
